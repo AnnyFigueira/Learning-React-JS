@@ -1,0 +1,9 @@
+<h1>Browsing all users</h1>
+ 
+<ul>
+  <% @users.each do |user| %>
+    <li>
+      <span><%= user.nickname %></span>
+    </li>
+  <% end %>
+</ul>

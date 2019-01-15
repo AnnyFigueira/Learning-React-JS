@@ -1,0 +1,163 @@
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+<!-- Ok the scripts are working now -->
+
+<h1>Desafio RN 2019</h1>
+<div class="wrapper">
+
+	<div id="content"></div>
+	<!-- It works!! -->
+	<script type="text/babel">
+		class Parent extends React.Component
+		{
+			constructor(props)
+			{
+				super(props);
+				this.state = {register:false,login:true};
+			}
+			
+			switch(word)
+			{
+				var register,login;
+				if(word == "register"){register = true;login = false;}
+				else{login = true; register = false;}
+				this.setState({login:login,register:register})
+			}
+
+			render()
+			{
+				return (
+					<React.Fragment> 
+						<h2> Welcome! </h2>
+						{this.state.register?<React.Fragment><RegisterForm/><span> Already have an account? <a href='#' id="loginLink" onClick={this.switch.bind("login")} > Login </a> </span> </React.Fragment>: null}
+						{this.state.login? <React.Fragment><LoginForm/>  </React.Fragment>: null}
+					</React.Fragment>
+				)
+			}
+		}
+
+		
+
+		class LoginForm extends React.Component{
+			constructor(props) 
+			{
+				super(props)
+				this.state = {username: '', password: '', submit: false};
+				this.handleChange = this.handleChange.bind(this);
+				this.handleSubmit = this.handleSubmit.bind(this);
+			}
+			
+			handleChange(e)
+			{
+				let change = {}
+				change[e.target.name] = e.target.value
+				this.setState(change)
+			}
+
+			handleSubmit(e)
+			{
+				this.setState({submit: true})
+			}
+
+			render()
+			{
+				return (
+					<React.Fragment>
+						{this.state.submit?<Index/>:
+						<form onSubmit={this.handleSubmit}>
+							<label htmlFor="username"> Username </label>
+							<input type="text" onChange={this.handleChange.bind(this)} value={this.state.name} />
+
+							<label htmlFor="password"> Password </label>
+							<input type="password" onChange={this.handleChange.bind(this)} value={this.state.name} />
+
+							<button type="submit"> Login </button>
+						</form>}
+					</React.Fragment>
+				)
+			}
+		}
+
+		class RegisterForm extends React.Component{
+			constructor() 
+			{
+				super()
+				this.state = { username: '', email: '', password: '', nickname: ''}
+				this.handleChange = this.handleChange.bind(this);
+			}
+			
+			handleChange(e)
+			{
+				let change = {}
+				change[e.target.name] = e.target.value
+				this.setState(change)
+			}
+
+			render()
+			{
+				return (
+					<form onSubmit={this.handleSubmit}>
+						<label htmlFor="username"> Username </label>
+						<input type="text" onChange={this.handleChange.bind(this)} value={this.state.name} />
+
+						<label htmlFor="email"> Email </label>
+						<input type="text" onChange={this.handleChange.bind(this)} value={this.state.name} />
+
+						<label htmlFor="password"> Password </label>
+						<input type="password" onChange={this.handleChange.bind(this)} value={this.state.name} />
+
+						<label htmlFor="nickname"> Nickname </label>
+						<input type="text" onChange={this.handleChange.bind(this)} value={this.state.name} />
+
+						<button type="submit"> Register </button>
+					</form>
+				)
+			}
+		}
+
+		class Index extends React.Component{
+			constructor()
+			{
+				super()
+			}
+		
+			manage()
+			{
+				
+			}
+
+			render()
+			{
+				return (
+					<ul>
+						<li><a href='#' onClick={this.manage.bind()}> Manage</a></li>
+						<li><a href='#' > Browse Files</a></li>
+						<li><a href='#' > All Users</a></li>
+					</ul>
+				)
+			}
+		}
+
+		ReactDOM.render(
+			<Parent />,
+			document.getElementById('content')
+		);
+	</script>
+
+	<!-- <span> Doesn't have an account? <a href='#' id="registerLink" onClick={this.switch.bind("register")} > Register </a> </span> -->
+	
+	<!--
+	<div id="content">
+		<%= render 'login_form' %>
+	</div>
+	-->
+
+	<!--<%= link_to 'User list', controller: 'users' %> -->
+	<!--<%= link_to 'Register', new_user_path %> -->
+	
+</div>
+
+
